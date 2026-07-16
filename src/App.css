@@ -609,6 +609,41 @@
   color: #ffffff !important;
   text-align: center;
   max-height: none !important;
+  display: flex !important;
+  flex-direction: column;
+  overflow: hidden !important;
+  padding-bottom: 0.35rem !important;
+}
+
+.travel-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.travel-footer {
+  flex: 0 0 auto;
+  padding-top: 0.35rem;
+  border-top: 1px solid #5555ff;
+  background: #000055;
+}
+
+.btn--travel-continue {
+  width: 100%;
+  justify-content: center;
+  min-height: 48px;
+  font-size: clamp(18px, 2.4vw, 22px);
+  background: #ffff55;
+  color: #000 !important;
+  border: 2px solid #ffff55;
+  text-decoration: none !important;
+}
+
+.btn--travel-continue:hover,
+.btn--travel-continue:focus-visible {
+  background: #ffffff;
+  color: #000 !important;
 }
 
 .travel-kicker {

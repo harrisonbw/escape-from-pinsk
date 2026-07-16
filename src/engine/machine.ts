@@ -110,24 +110,26 @@ function shouldShowTravel(
 ): boolean {
   if (toId === "BOOT" || toId === "GAMEOVER" || toId === "S01") return false;
   const to = getNode(toId);
-  if (to.kind === "continue") return true;
-  if (to.kind === "choice" && to.dateLabel && to.dateLabel !== state.dateLabel) {
-    return true;
-  }
-  if (
-    (fromId === "S01" && (toId === "S01B" || toId === "S01C")) ||
-    fromId === "S01B" ||
-    fromId === "S01C"
-  ) {
-    return true;
-  }
+  if (to.kind === "terminal") return false;
+
   const route =
     routeFromNode(toId) !== "none" ? routeFromNode(toId) : state.route;
+
+  // Season change → always show travel
+  if (to.dateLabel && to.dateLabel !== state.dateLabel) return true;
+
+  // First flight out of the village
+  if (fromId === "S01" && (toId === "S01B" || toId === "S01C")) return true;
+
+  // Landmark change along a route
   if (route !== "none") {
     const a = landmarkIndexFor(route, fromId);
     const b = landmarkIndexFor(route, toId);
-    if (a !== b && to.kind !== "terminal") return true;
+    if (a !== b) return true;
   }
+
+  // Don't show a travel interstitial for same-landmark continues
+  // (was stranding players on "ARRIVED · PINSK" with a clipped button)
   return false;
 }
 

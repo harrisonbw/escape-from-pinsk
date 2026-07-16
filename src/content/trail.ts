@@ -7,27 +7,101 @@ export interface Landmark {
   name: string;
   /** Position along trail 0–100 */
   pct: number;
-  /** First node id (or prefix) that places the player here */
+  /** Node ids that place the player here */
   nodes: string[];
   miles: number;
 }
 
 export const WEST_LANDMARKS: Landmark[] = [
-  { id: "pinsk", name: "PINSK", pct: 0, nodes: ["S01", "S01B"], miles: 0 },
-  { id: "road", name: "COUNTRYSIDE", pct: 14, nodes: ["W01", "W01A", "W01B"], miles: 48 },
-  { id: "farm", name: "THE FARM", pct: 28, nodes: ["W02", "W02A", "W02B", "W03", "W03A", "W03B"], miles: 52 },
-  { id: "town", name: "TOWN", pct: 46, nodes: ["W04", "W04A", "W04B", "W05", "W05A", "W05B"], miles: 71 },
-  { id: "camp", name: "LABOR CAMP", pct: 64, nodes: ["W06", "W06A", "W06B"], miles: 38 },
-  { id: "rail", name: "RAILCAR", pct: 80, nodes: ["W07", "W07A", "W07B"], miles: 95 },
-  { id: "far2", name: "FARMYARD", pct: 100, nodes: ["W08", "W08A", "W08B"], miles: 120 },
+  { id: "pinsk", name: "PINSK", pct: 0, nodes: ["S01"], miles: 0 },
+  {
+    id: "flee_west",
+    name: "WEST ROAD",
+    pct: 8,
+    nodes: ["S01B"],
+    miles: 5,
+  },
+  {
+    id: "road",
+    name: "COUNTRYSIDE",
+    pct: 18,
+    nodes: ["W01", "W01A", "W01B"],
+    miles: 48,
+  },
+  {
+    id: "farm",
+    name: "THE FARM",
+    pct: 34,
+    nodes: ["W02", "W02A", "W02B", "W03", "W03A", "W03B"],
+    miles: 52,
+  },
+  {
+    id: "town",
+    name: "TOWN",
+    pct: 52,
+    nodes: ["W04", "W04A", "W04B", "W05", "W05A", "W05B"],
+    miles: 71,
+  },
+  {
+    id: "camp",
+    name: "LABOR CAMP",
+    pct: 68,
+    nodes: ["W06", "W06A", "W06B"],
+    miles: 38,
+  },
+  {
+    id: "rail",
+    name: "RAILCAR",
+    pct: 84,
+    nodes: ["W07", "W07A", "W07B"],
+    miles: 95,
+  },
+  {
+    id: "far2",
+    name: "FARMYARD",
+    pct: 100,
+    nodes: ["W08", "W08A", "W08B"],
+    miles: 120,
+  },
 ];
 
 export const EAST_LANDMARKS: Landmark[] = [
-  { id: "pinsk", name: "PINSK", pct: 0, nodes: ["S01", "S01C"], miles: 0 },
-  { id: "forest", name: "FOREST", pct: 20, nodes: ["E01", "E01A", "E01B"], miles: 22 },
-  { id: "marsh", name: "MARSH", pct: 42, nodes: ["E02", "E02A", "E02B", "E03", "E03A"], miles: 18 },
-  { id: "band", name: "PARTISANS", pct: 68, nodes: ["E03B", "E04", "E04A", "E04B"], miles: 31 },
-  { id: "hunger", name: "VILLAGE EDGE", pct: 100, nodes: ["E05", "E05A", "E05B"], miles: 27 },
+  { id: "pinsk", name: "PINSK", pct: 0, nodes: ["S01"], miles: 0 },
+  {
+    id: "flee_east",
+    name: "EAST WOODS",
+    pct: 10,
+    nodes: ["S01C"],
+    miles: 5,
+  },
+  {
+    id: "forest",
+    name: "FOREST",
+    pct: 28,
+    nodes: ["E01", "E01A", "E01B"],
+    miles: 22,
+  },
+  {
+    id: "marsh",
+    name: "MARSH",
+    pct: 50,
+    nodes: ["E02", "E02A", "E02B", "E03", "E03A"],
+    miles: 18,
+  },
+  {
+    id: "band",
+    name: "PARTISANS",
+    pct: 74,
+    nodes: ["E03B", "E04", "E04A", "E04B"],
+    miles: 31,
+  },
+  {
+    id: "hunger",
+    name: "VILLAGE EDGE",
+    pct: 100,
+    nodes: ["E05", "E05A", "E05B"],
+    miles: 27,
+  },
 ];
 
 export function landmarksFor(route: RouteId): Landmark[] {
@@ -59,19 +133,13 @@ export function milesForArrival(nodeId: string, route: RouteId): number {
   const marks = landmarksFor(route);
   const idx = landmarkIndexFor(route, nodeId);
   if (idx <= 0) {
-    // Small walk within same landmark
-    if (nodeId === "S01B" || nodeId === "S01C") return 5;
     if (nodeId === "S01A") return 0;
-    return 8;
+    return 4;
   }
-  const prev = marks[idx - 1];
+  const prev = marks[Math.max(0, idx - 1)];
   const cur = marks[idx];
-  // Share segment miles across nodes in the same landmark cluster
-  const sameAsPrev =
-    landmarkIndexFor(route, nodeId) ===
-    landmarkIndexFor(route, prev.nodes[0] ?? "");
-  if (sameAsPrev) return 6;
-  return Math.max(6, Math.round((cur.miles - prev.miles) * 0.85) || cur.miles);
+  const delta = Math.abs((cur?.miles ?? 0) - (prev?.miles ?? 0));
+  return Math.max(4, Math.round(delta * 0.85) || 8);
 }
 
 export interface SeasonBeat {
