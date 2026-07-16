@@ -33,6 +33,13 @@ export function Game() {
     node.kind === "choice" ||
     node.kind === "continue";
   const showTombstone = node.id === "GAMEOVER" && state.epitaph != null;
+  const prefetchIds = useMemo(() => {
+    const ids: string[] = [];
+    if (node.choices) for (const c of node.choices) ids.push(c.next);
+    if (node.next) ids.push(node.next);
+    if (state.travel) ids.push(state.travel.nextNodeId);
+    return ids;
+  }, [node, state.travel]);
 
   useEffect(() => {
     setTypeDone(false);
@@ -165,6 +172,7 @@ export function Game() {
         mode={mode}
         topBar={<Hud state={state} visible={showHud} mode={mode} />}
         dimArt={Boolean(state.travel) || showTombstone}
+        prefetchIds={prefetchIds}
       >
         {state.travel ? (
           <TrailMap
@@ -228,7 +236,7 @@ export function Game() {
                     <Typewriter
                       text={node.prose}
                       className="scene-prose"
-                      speed={16}
+                      speed={8}
                       skip={skipType}
                       onDone={() => setTypeDone(true)}
                     />
@@ -280,7 +288,7 @@ export function Game() {
                     <Typewriter
                       text={node.prose}
                       className="scene-prose"
-                      speed={16}
+                      speed={8}
                       skip={skipType}
                       onDone={() => setTypeDone(true)}
                     />
@@ -323,7 +331,7 @@ export function Game() {
                     <Typewriter
                       text={node.prose}
                       className="scene-prose"
-                      speed={20}
+                      speed={10}
                       skip={skipType}
                       onDone={() => setTypeDone(true)}
                     />

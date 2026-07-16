@@ -13,7 +13,7 @@ export const NODES: Record<string, StoryNode> = {
     kind: "boot",
     prose:
       "Which Concentration Camp Would You Have Died In?\n\nFollow the Holocaust Trail...",
-    image: { style: "a", file: "A-BOOT_title_screen.png" },
+    image: { style: "a", file: "A-BOOT_title_screen.webp" },
     cta: "PLAY",
     next: "S01",
   },
@@ -26,7 +26,7 @@ export const NODES: Record<string, StoryNode> = {
     title: "The Village",
     prose:
       "It's July 1941. You are Jewish. The Vermacht has just taken over your of Pinsk, Poland, 5 miles from your village. Do you...",
-    image: { style: "b", file: "S01_village_july_1941.png" },
+    image: { style: "b", file: "S01_village_july_1941.webp" },
     choices: [
       {
         id: "stay",
@@ -66,7 +66,7 @@ export const NODES: Record<string, StoryNode> = {
     title: "The Synagogue",
     prose:
       "The Germans leave. Two days later, Police Auxillerary Units round up the entire town, force them into the synagogue and set it on fire.",
-    image: { style: "a", file: "S01A_synagogue_fire.png" },
+    image: { style: "a", file: "S01A_synagogue_fire.webp" },
     status: "KILLED",
   },
 
@@ -77,7 +77,7 @@ export const NODES: Record<string, StoryNode> = {
     title: "West",
     prose:
       "You move West toward Nazi occupied Poland. You can sense in your bones you will never see your home again.",
-    image: { style: "b", file: "S01B_fleeing_west.png" },
+    image: { style: "b", file: "S01B_fleeing_west.webp" },
     cta: "Continue",
     next: "W01",
   },
@@ -89,7 +89,7 @@ export const NODES: Record<string, StoryNode> = {
     title: "East",
     prose:
       "You escape East into the forests of Belarus. You don't know how to start a fire or build a shelter in the woods. The air is thick and strange sounds echo and creek from all directions of the wilderness.",
-    image: { style: "b", file: "S01C_fleeing_east.png" },
+    image: { style: "b", file: "S01C_fleeing_east.webp" },
     cta: "Continue",
     next: "E01",
   },
@@ -102,7 +102,7 @@ export const NODES: Record<string, StoryNode> = {
     title: "The Countryside",
     prose:
       "You have been traveling the countryside alone for months. Hungry, faint and weak. Do you stop in a nearby town for the night?",
-    image: { style: "b", file: "W01_countryside_autumn_1941.png" },
+    image: { style: "b", file: "W01_countryside_autumn_1941.webp" },
     choices: [
       {
         id: "wander",
@@ -131,7 +131,7 @@ export const NODES: Record<string, StoryNode> = {
     title: "The Road",
     prose:
       "You are captured and killed by a Romanian rear guard auxiliary unit.",
-    image: { style: "a", file: "W01A_captured_on_road.png" },
+    image: { style: "a", file: "W01A_captured_on_road.webp" },
     status: "KILLED",
   },
 
@@ -142,7 +142,7 @@ export const NODES: Record<string, StoryNode> = {
     title: "The Barn",
     prose:
       "No rooms available but they let you sleep in barn with the donkey for a few months.",
-    image: { style: "b", file: "W01B_barn_refuge.png" },
+    image: { style: "b", file: "W01B_barn_refuge.webp" },
     cta: "Continue",
     next: "W02",
   },
@@ -154,7 +154,7 @@ export const NODES: Record<string, StoryNode> = {
     title: "Winter in the Barn",
     prose:
       "Winter has arrived and the Polish family is short on food. You can stay in their stable and get whatever leftovers they may rummage or leave the farm and rewander the countryside.",
-    image: { style: "b", file: "W02_winter_barn.png" },
+    image: { style: "b", file: "W02_winter_barn.webp" },
     choices: [
       {
         id: "stay",
@@ -178,7 +178,7 @@ export const NODES: Record<string, StoryNode> = {
     title: "Leftovers",
     prose:
       "They feel bad that for you. You get what little leftovers they have. You lose any body fat you may have had but are still alive.",
-    image: { style: "b", file: "W02A_leftovers_winter.png" },
+    image: { style: "b", file: "W02A_leftovers_winter.webp" },
     cta: "Continue",
     next: "W03",
   },
@@ -190,7 +190,7 @@ export const NODES: Record<string, StoryNode> = {
     title: "The Field",
     prose:
       "Found by a Ukrainian Waffen SS Unit, made to dig your own grave then are summarily executed.",
-    image: { style: "a", file: "W02B_dug_grave.png" },
+    image: { style: "a", file: "W02B_dug_grave.webp" },
     status: "KILLED",
   },
 
@@ -200,7 +200,7 @@ export const NODES: Record<string, StoryNode> = {
     dateLabel: "Jan–Feb 1942",
     title: "Asked to Leave",
     prose: "Halfway through the winter the Polish family asks you to leave. You...",
-    image: { style: "b", file: "W03_asked_to_leave.png" },
+    image: { style: "b", file: "W03_asked_to_leave.webp" },
     choices: [
       {
         id: "leave",
@@ -229,7 +229,7 @@ export const NODES: Record<string, StoryNode> = {
     title: "The Road East",
     prose:
       "Found by three Ukrainian teenagers who strip you of your clothes before stabbing you in the leg and then beating you to death with an iron pipe.",
-    image: { style: "a", file: "W03A_teenagers_on_road.png" },
+    image: { style: "a", file: "W03A_teenagers_on_road.webp" },
     status: "KILLED",
   },
 
@@ -240,7 +240,7 @@ export const NODES: Record<string, StoryNode> = {
     title: "Theft",
     prose:
       "They let you stay a few more weeks and when they are not suspecting you steal all their belongings, valuables and food. You set off again solo.",
-    image: { style: "b", file: "W03B_theft.png" },
+    image: { style: "b", file: "W03B_theft.webp" },
     cta: "Continue",
     next: "W04",
   },
@@ -252,7 +252,7 @@ export const NODES: Record<string, StoryNode> = {
     title: "A Small Town",
     prose:
       "You run out of food but still have some valuables from the Polish farming family. You come across and small town.",
-    image: { style: "b", file: "W04_town_square_barter.png" },
+    image: { style: "b", file: "W04_town_square_barter.webp" },
     choices: [
       {
         id: "barter",
@@ -282,7 +282,7 @@ export const NODES: Record<string, StoryNode> = {
     title: "Barter",
     prose:
       "You sucessfully trade for some food, a shared room at an inn and a new pair of shoes.",
-    image: { style: "b", file: "W04A_barter_succeeds.png" },
+    image: { style: "b", file: "W04A_barter_succeeds.webp" },
     cta: "Continue",
     next: "W05",
   },
@@ -294,7 +294,7 @@ export const NODES: Record<string, StoryNode> = {
     title: "The Ghetto",
     prose:
       'In "checking you in" and making sure you are disarmed a ghetto guard throws you to the floor scraping your face. The small wound gets infected and days later you die.',
-    image: { style: "a", file: "W04B_ghetto_wound.png" },
+    image: { style: "a", file: "W04B_ghetto_wound.webp" },
     status: "KILLED",
   },
 
@@ -304,7 +304,7 @@ export const NODES: Record<string, StoryNode> = {
     dateLabel: "May–Jun 1942",
     title: "The Sweep",
     prose: "Eizatgruppen are scanning the town for Jews, do you...",
-    image: { style: "b", file: "W05_sweep_town.png" },
+    image: { style: "b", file: "W05_sweep_town.webp" },
     choices: [
       {
         id: "flee",
@@ -333,7 +333,7 @@ export const NODES: Record<string, StoryNode> = {
     title: "Slipping Out",
     prose:
       "You sucessfully flee nobody expecting you were a Jew, but now you have no food or supplies.",
-    image: { style: "b", file: "W05A_slipping_out.png" },
+    image: { style: "b", file: "W05A_slipping_out.webp" },
     cta: "Continue",
     next: "W06",
   },
@@ -345,7 +345,7 @@ export const NODES: Record<string, StoryNode> = {
     title: "The Pit",
     prose:
       "The guards confiscate your possessions, march you to the outskirts of town where you are knelt in front of a pit and shot in the back of the head.",
-    image: { style: "a", file: "W05B_pit_town_edge.png" },
+    image: { style: "a", file: "W05B_pit_town_edge.webp" },
     status: "KILLED",
   },
 
@@ -356,7 +356,7 @@ export const NODES: Record<string, StoryNode> = {
     title: "Labor Camp",
     prose:
       "The local police raid the room you are slumming in and arrest you. You are immediately transferred to a labor camp. Do you...",
-    image: { style: "b", file: "W06_labor_camp_wire.png" },
+    image: { style: "b", file: "W06_labor_camp_wire.webp" },
     choices: [
       {
         id: "endure",
@@ -380,7 +380,7 @@ export const NODES: Record<string, StoryNode> = {
     title: "Enduring",
     prose:
       "Day in and day out you work in the camp with no escape or liberation in sight. But you are alive.",
-    image: { style: "b", file: "W06A_enduring_camp.png" },
+    image: { style: "b", file: "W06A_enduring_camp.webp" },
     cta: "Continue",
     next: "W07",
   },
@@ -392,7 +392,7 @@ export const NODES: Record<string, StoryNode> = {
     title: "The Wire",
     prose:
       "You're 100 yards outside the wire when a bullet rips through your spine leaving you paralyzed. You bleed out unable to move over the next two days of agony.",
-    image: { style: "a", file: "W06B_wire.png" },
+    image: { style: "a", file: "W06B_wire.webp" },
     status: "KILLED",
   },
 
@@ -403,7 +403,7 @@ export const NODES: Record<string, StoryNode> = {
     title: "The Railcar",
     prose:
       "One day you are marked for transfer out of the labor camp. The train stops and your door is accendentally jarred open. Some begin to flee the traincar, most stay. Do you...",
-    image: { style: "b", file: "W07_railcar_door.png" },
+    image: { style: "b", file: "W07_railcar_door.webp" },
     choices: [
       {
         id: "flee",
@@ -427,7 +427,7 @@ export const NODES: Record<string, StoryNode> = {
     title: "The Sprint",
     prose:
       "You sprint away without looking back. Most escapees are shot but you manage to make it to a nearby field with nobody in sight.",
-    image: { style: "b", file: "W07A_sprint.png" },
+    image: { style: "b", file: "W07A_sprint.webp" },
     cta: "Continue",
     next: "W08",
   },
@@ -439,7 +439,7 @@ export const NODES: Record<string, StoryNode> = {
     title: "Chelmno",
     prose:
       "The train is fixed. You are transferred to Chelmno and gassed immediately upon arrival.",
-    image: { style: "a", file: "W07B_bronna_gora.png" },
+    image: { style: "a", file: "W07B_bronna_gora.webp" },
     status: "KILLED",
   },
 
@@ -450,7 +450,7 @@ export const NODES: Record<string, StoryNode> = {
     title: "Another Farm",
     prose:
       "Months later and miles from wherever the train left you are starving and come upon a farm you suspect belongs to a Polish family. You...",
-    image: { style: "b", file: "W08_farm_after_escape.png" },
+    image: { style: "b", file: "W08_farm_after_escape.webp" },
     choices: [
       {
         id: "steal",
@@ -474,7 +474,7 @@ export const NODES: Record<string, StoryNode> = {
     title: "Caught",
     prose:
       "You are caught and the farmer screaming in Ukrainian Russian shoots you as you try to leave.",
-    image: { style: "a", file: "W08A_farmers_shot.png" },
+    image: { style: "a", file: "W08A_farmers_shot.webp" },
     status: "KILLED",
   },
 
@@ -485,7 +485,7 @@ export const NODES: Record<string, StoryNode> = {
     title: "New Occupants",
     prose:
       "The Polish family that once lived there was evicted and replaced by a Ukrainian family. The father and teenage son bound you and beat you to death with a wooden stick.",
-    image: { style: "a", file: "W08B_new_occupants.png" },
+    image: { style: "a", file: "W08B_new_occupants.webp" },
     status: "KILLED",
   },
 
@@ -496,7 +496,7 @@ export const NODES: Record<string, StoryNode> = {
     dateLabel: "Sep–Oct 1941",
     title: "First Night in the Forest",
     prose: "Fall begins and it begins to get cold in the forest. You...",
-    image: { style: "b", file: "E01_first_night_forest.png" },
+    image: { style: "b", file: "E01_first_night_forest.webp" },
     choices: [
       {
         id: "south",
@@ -520,7 +520,7 @@ export const NODES: Record<string, StoryNode> = {
     title: "The Stone",
     prose:
       "You stumble upon a Ukrainian peasant. He's slightly bored and takes it out on you by hitting you in the head with a large stone. You bleed to death.",
-    image: { style: "a", file: "E01A_peasants_stone.png" },
+    image: { style: "a", file: "E01A_peasants_stone.webp" },
     status: "KILLED",
   },
 
@@ -531,7 +531,7 @@ export const NODES: Record<string, StoryNode> = {
     title: "The Marsh",
     prose:
       "You find a small marsh to hide in. Insects while the days are warm, sleepless nights in the cold but you are alive.",
-    image: { style: "b", file: "E01B_into_marsh.png" },
+    image: { style: "b", file: "E01B_into_marsh.webp" },
     cta: "Continue",
     next: "E02",
   },
@@ -542,7 +542,7 @@ export const NODES: Record<string, StoryNode> = {
     dateLabel: "Nov–Dec 1941",
     title: "Freezing Swamp",
     prose: "As Winter gets more intense, the Swamp too begins to freeze over. You...",
-    image: { style: "b", file: "E02_freezing_swamp.png" },
+    image: { style: "b", file: "E02_freezing_swamp.webp" },
     choices: [
       {
         id: "locals",
@@ -566,7 +566,7 @@ export const NODES: Record<string, StoryNode> = {
     title: "Ransacked Town",
     prose:
       "A week after the town is ransacked by Lithuanian Waffen SS who find out you are Jewish and beat you to death with a pipe.",
-    image: { style: "a", file: "E02A_ransacked_town.png" },
+    image: { style: "a", file: "E02A_ransacked_town.webp" },
     status: "KILLED",
   },
 
@@ -577,7 +577,7 @@ export const NODES: Record<string, StoryNode> = {
     title: "Alone in the Reeds",
     prose:
       "Insect bites now cover your entire body and a strange infection spreads across your leg.",
-    image: { style: "b", file: "E02B_winter_alone_reeds.png" },
+    image: { style: "b", file: "E02B_winter_alone_reeds.webp" },
     cta: "Continue",
     next: "E03",
   },
@@ -589,7 +589,7 @@ export const NODES: Record<string, StoryNode> = {
     title: "Gangs, Partisans, Patrols",
     prose:
       "The marshes are teaming with gangs, partisan groups, and military units. Do you...",
-    image: { style: "b", file: "E03_gangs_partisans_patrols.png" },
+    image: { style: "b", file: "E03_gangs_partisans_patrols.webp" },
     choices: [
       {
         id: "alone",
@@ -618,7 +618,7 @@ export const NODES: Record<string, StoryNode> = {
     title: "The Bog",
     prose:
       'You are picked up by a reargaurd Waffen SS unit of a language you cannot understand. One of the "officers" stabs you and lets you bleed out in a bog they leave you in.',
-    image: { style: "a", file: "E03A_bog.png" },
+    image: { style: "a", file: "E03A_bog.webp" },
     status: "KILLED",
   },
 
@@ -629,7 +629,7 @@ export const NODES: Record<string, StoryNode> = {
     title: "The Band",
     prose:
       "You meet a partisan gang of Belrussians a few miles north. They haze you a bit for being Jewish but let you join if you promise to fight.",
-    image: { style: "b", file: "E03B_joining_band.png" },
+    image: { style: "b", file: "E03B_joining_band.webp" },
     cta: "Continue",
     next: "E04",
   },
@@ -641,7 +641,7 @@ export const NODES: Record<string, StoryNode> = {
     title: "Supply Raid",
     prose:
       "Starving, the gang is preparing a raid to get supllies on a German reargaurd post. You...",
-    image: { style: "b", file: "E04_supply_raid_decision.png" },
+    image: { style: "b", file: "E04_supply_raid_decision.webp" },
     choices: [
       {
         id: "fight",
@@ -669,7 +669,7 @@ export const NODES: Record<string, StoryNode> = {
     dateLabel: "Mar–Apr 1942",
     title: "The Squad",
     prose: "Your entire squad is killed by the supply depot gaurds.",
-    image: { style: "a", file: "E04A_squad_wiped_out.png" },
+    image: { style: "a", file: "E04A_squad_wiped_out.webp" },
     status: "KILLED",
   },
 
@@ -680,7 +680,7 @@ export const NODES: Record<string, StoryNode> = {
     title: "Desertion",
     prose:
       "You flee to the woods with their as much of their already depleated supplies you can carry.",
-    image: { style: "b", file: "E04B_deserting_rifle.png" },
+    image: { style: "b", file: "E04B_deserting_rifle.webp" },
     cta: "Continue",
     next: "E05",
   },
@@ -691,7 +691,7 @@ export const NODES: Record<string, StoryNode> = {
     dateLabel: "May–Jun 1942",
     title: "Hunger",
     prose: "You begin running out of food and you cannot hunt. You...",
-    image: { style: "b", file: "E05_hunger_early_summer.png" },
+    image: { style: "b", file: "E05_hunger_early_summer.webp" },
     choices: [
       {
         id: "raid",
@@ -715,7 +715,7 @@ export const NODES: Record<string, StoryNode> = {
     title: "The Carcass",
     prose:
       "Village was already abandoned by it's inhabitants. No food to be found you have to resort to eating a racoon carcass you find. You get stomach worms and die of dihearrea.",
-    image: { style: "a", file: "E05A_carcass.png" },
+    image: { style: "a", file: "E05A_carcass.webp" },
     status: "ILLNESS",
   },
 
@@ -725,7 +725,7 @@ export const NODES: Record<string, StoryNode> = {
     dateLabel: "May–Jun 1942",
     title: "Dysentery",
     prose: "You are too weak. You get sick and die of dystentary.",
-    image: { style: "a", file: "E05B_dysentery.png" },
+    image: { style: "a", file: "E05B_dysentery.webp" },
     status: "ILLNESS",
   },
 
@@ -733,7 +733,7 @@ export const NODES: Record<string, StoryNode> = {
     id: "GAMEOVER",
     kind: "boot",
     prose: "The route ends here.",
-    image: { style: "a", file: "A-GAMEOVER_end_screen.png" },
+    image: { style: "a", file: "A-GAMEOVER_end_screen.webp" },
     cta: "TRY AGAIN",
     next: "BOOT",
   },

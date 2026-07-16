@@ -7,7 +7,7 @@ import {
 } from "../content/trail";
 import type { TravelState } from "../engine/types";
 
-const TRAVEL_MS = 2200;
+const TRAVEL_MS = 1100;
 
 interface TrailMapProps {
   route: RouteId;
@@ -53,7 +53,7 @@ export function TrailMap({
       const pct = fromPct + (toPct - fromPct) * eased;
       setWagonPct(pct);
 
-      if (now - lastCreak > 280 && t < 0.95) {
+      if (now - lastCreak > 380 && t < 0.92) {
         wagonCreak();
         lastCreak = now;
       }
