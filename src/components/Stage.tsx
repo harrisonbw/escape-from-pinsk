@@ -8,6 +8,8 @@ interface StageProps {
   children: ReactNode;
   topBar?: ReactNode;
   dimArt?: boolean;
+  /** Final tombstone — fill whole stage, no half-console scroll */
+  endScreen?: boolean;
   /** Optional next image to warm the cache */
   prefetchIds?: string[];
 }
@@ -18,6 +20,7 @@ export function Stage({
   children,
   topBar,
   dimArt,
+  endScreen = false,
   prefetchIds = [],
 }: StageProps) {
   const src = node.image
@@ -74,9 +77,13 @@ export function Stage({
         <div className="monitor-screw monitor-screw--br" aria-hidden />
 
         <div
-          className={`stage stage--${mode}${dimArt ? " stage--travel" : ""}`}
+          className={
+            `stage stage--${mode}` +
+            (dimArt ? " stage--travel" : "") +
+            (endScreen ? " stage--end" : "")
+          }
         >
-          {topBar}
+          {!endScreen && topBar}
 
           <div className="stage-viewport">
             {showSrc && (
@@ -92,7 +99,7 @@ export function Stage({
             <div className="stage-scanlines" aria-hidden />
             <div className="stage-phosphor" aria-hidden />
             <div className="stage-vignette" aria-hidden />
-            {dimArt && <div className="stage-dim" aria-hidden />}
+            {(dimArt || endScreen) && <div className="stage-dim" aria-hidden />}
           </div>
 
           <div className="stage-console">{children}</div>

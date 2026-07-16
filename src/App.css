@@ -875,6 +875,39 @@
   transition: width 0.05s linear;
 }
 
+/* ── End screen (full stage, no nested scroll) ───────────────────────── */
+
+.stage--end {
+  position: relative;
+}
+
+.stage--end .stage-viewport {
+  position: absolute;
+  inset: 0;
+  flex: none;
+  min-height: 0;
+  z-index: 1;
+}
+
+.stage--end .stage-art {
+  opacity: 0.28;
+  filter: contrast(1.05) brightness(0.85);
+}
+
+.stage--end .stage-dim {
+  background: rgba(0, 0, 0, 0.72);
+}
+
+.stage--end .stage-console {
+  position: relative;
+  z-index: 4;
+  flex: 1 1 auto;
+  max-height: none;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
 /* ── Tombstone / epitaph ─────────────────────────────────────────────── */
 
 .tombstone {
@@ -883,113 +916,151 @@
   min-height: 0;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
-.tombstone-frame {
-  border-color: #33ff33 !important;
-  background: #000 !important;
-  flex: 1;
+.tombstone-panel {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
   min-height: 0;
-}
-
-.tombstone-inner {
-  border-color: #00aa00 !important;
-  color: #33ff33 !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(0.35rem, 1.4vh, 0.75rem);
+  padding: clamp(0.55rem, 2.2vh, 1.1rem) clamp(0.65rem, 3vw, 1.4rem);
+  overflow: hidden;
   text-align: center;
-  max-height: none !important;
+  color: #33ff33;
+  border: 3px double #33ff33;
+  background: rgba(0, 0, 0, 0.88);
 }
 
-.tombstone-art {
-  margin: 0 auto 0.4rem;
-  font-family: "VT323", monospace;
-  font-size: clamp(11px, 1.6vw, 15px);
-  line-height: 1.15;
+.tombstone-kicker {
+  margin: 0;
+  flex: 0 0 auto;
+  font-family: "Press Start 2P", monospace;
+  font-size: clamp(7px, 1.5vh, 10px);
+  line-height: 1.45;
+  letter-spacing: 0.06em;
   color: #00aa00;
-  text-align: center;
-  white-space: pre;
 }
 
 .tombstone-banner {
-  margin: 0 0 0.35rem;
+  margin: 0;
+  flex: 0 0 auto;
   font-family: "Press Start 2P", monospace;
-  font-size: clamp(8px, 1.2vw, 11px);
+  font-size: clamp(9px, 1.8vh, 13px);
   letter-spacing: 0.08em;
   color: #ff5555;
   text-shadow: 0 0 10px rgba(255, 85, 85, 0.35);
 }
 
-.tombstone-title {
-  margin: 0 0 0.65rem;
-  font-family: "Press Start 2P", monospace;
-  font-size: clamp(10px, 1.5vw, 14px);
-  line-height: 1.45;
-  letter-spacing: 0.06em;
-  color: #33ff33;
-}
-
 .tombstone-stats {
-  margin: 0 auto 0.75rem;
-  max-width: 28rem;
+  flex: 0 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(0.2rem, 0.8vh, 0.4rem) 0.75rem;
+  margin: 0 auto;
+  width: min(100%, 36rem);
   text-align: left;
   border: 1px solid #005500;
   background: #001100;
-  padding: 0.4rem 0.55rem;
+  padding: clamp(0.3rem, 1vh, 0.55rem) clamp(0.4rem, 1.2vw, 0.65rem);
 }
 
-.tombstone-row {
-  display: grid;
-  grid-template-columns: 7.5rem 1fr;
-  gap: 0.4rem;
-  padding: 0.2rem 0;
-  border-bottom: 1px dashed #003300;
-  font-size: clamp(15px, 2vw, 19px);
-  line-height: 1.25;
+.tombstone-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
 }
 
-.tombstone-row:last-child {
-  border-bottom: none;
+.tombstone-stat--full {
+  grid-column: 1 / -1;
 }
 
-.tombstone-row dt {
-  margin: 0;
+.tombstone-stat-k {
+  font-family: "Press Start 2P", monospace;
+  font-size: clamp(6px, 1.1vh, 8px);
+  letter-spacing: 0.08em;
   color: #00aa00;
-  letter-spacing: 0.06em;
 }
 
-.tombstone-row dd {
-  margin: 0;
+.tombstone-stat-v {
+  font-size: clamp(13px, 2.1vh, 18px);
+  line-height: 1.25;
   color: #33ff33;
+  overflow-wrap: anywhere;
 }
 
 .tombstone-cause {
-  margin: 0 auto 0.65rem;
-  max-width: 28rem;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: min(100%, 36rem);
   text-align: left;
-  padding: 0.45rem 0.55rem;
+  padding: clamp(0.35rem, 1.1vh, 0.55rem) clamp(0.4rem, 1.2vw, 0.65rem);
   border: 1px solid #550000;
-  background: #110000;
+  background: rgba(17, 0, 0, 0.92);
+  overflow: hidden;
 }
 
 .tombstone-cause-label {
   margin: 0 0 0.25rem;
+  flex: 0 0 auto;
   font-family: "Press Start 2P", monospace;
-  font-size: 7px;
+  font-size: clamp(6px, 1.1vh, 8px);
   letter-spacing: 0.1em;
   color: #ff5555;
 }
 
 .tombstone-cause-text {
   margin: 0;
-  font-size: clamp(15px, 2vw, 18px);
-  line-height: 1.3;
+  flex: 1 1 auto;
+  min-height: 0;
+  font-size: clamp(12px, 1.9vh, 17px);
+  line-height: 1.28;
   color: #33ff33;
+  overflow-wrap: anywhere;
+  /* Show full draft result — scale with viewport, no nested scroll */
+  overflow: hidden;
 }
 
-.tombstone-epilogue {
-  margin: 0 0 0.85rem;
-  font-size: clamp(15px, 2vw, 18px);
-  color: #00aa00;
-  line-height: 1.3;
+.tombstone-actions {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding-top: 0.15rem;
+}
+
+.tombstone-actions .btn--play {
+  margin: 0;
+}
+
+@media (max-height: 640px) {
+  .tombstone-cause-text {
+    font-size: clamp(11px, 1.7vh, 14px);
+    line-height: 1.22;
+  }
+
+  .tombstone-stats {
+    gap: 0.15rem 0.5rem;
+  }
+
+  .tombstone-kicker {
+    font-size: clamp(6px, 1.2vh, 8px);
+  }
+}
+
+@media (max-width: 520px) {
+  .tombstone-stats {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Mobile: stack header fields, keep choices tappable */

@@ -171,7 +171,8 @@ export function Game() {
         node={node}
         mode={mode}
         topBar={<Hud state={state} visible={showHud} mode={mode} />}
-        dimArt={Boolean(state.travel) || showTombstone}
+        dimArt={Boolean(state.travel)}
+        endScreen={showTombstone}
         prefetchIds={prefetchIds}
       >
         {state.travel ? (

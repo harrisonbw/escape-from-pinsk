@@ -16,48 +16,41 @@ export function Tombstone({ epitaph, onRetry }: TombstoneProps) {
 
   return (
     <div className="tombstone">
-      <div className="console-frame tombstone-frame">
-        <div className="console-frame-inner tombstone-inner">
-          <pre className="tombstone-art" aria-hidden>{`
-    .-+-[[ HERE LIES ]]-+-.
-   /                       \\
-  |     A TRAVELER FROM     |
-  |         PINSK           |
-   \\                       /
-    '-----._______.------'
-`}</pre>
+      <div className="tombstone-panel">
+        <p className="tombstone-kicker">HERE LIES A TRAVELER FROM PINSK</p>
+        <p className="tombstone-banner">══ {status} ══</p>
 
-          <p className="tombstone-banner">══ {status} ══</p>
-
-          <dl className="tombstone-stats">
-            <div className="tombstone-row">
-              <dt>DATE</dt>
-              <dd>{epitaph.dateLabel}</dd>
-            </div>
-            <div className="tombstone-row">
-              <dt>MILES</dt>
-              <dd>{epitaph.miles}</dd>
-            </div>
-            <div className="tombstone-row">
-              <dt>ROUTE</dt>
-              <dd>{ROUTE_LABEL[epitaph.route]}</dd>
-            </div>
-            <div className="tombstone-row">
-              <dt>DECISIONS</dt>
-              <dd>{epitaph.decisions}</dd>
-            </div>
-            <div className="tombstone-row tombstone-row--wide">
-              <dt>LANDMARKS</dt>
-              <dd>{epitaph.landmarks.join(" → ")}</dd>
-            </div>
-          </dl>
-
-          {/* Cause is verbatim draft result text only — no rephrasing */}
-          <div className="tombstone-cause">
-            <p className="tombstone-cause-label">RESULT</p>
-            <p className="tombstone-cause-text">{epitaph.cause}</p>
+        <div className="tombstone-stats" role="list">
+          <div className="tombstone-stat" role="listitem">
+            <span className="tombstone-stat-k">DATE</span>
+            <span className="tombstone-stat-v">{epitaph.dateLabel}</span>
           </div>
+          <div className="tombstone-stat" role="listitem">
+            <span className="tombstone-stat-k">MILES</span>
+            <span className="tombstone-stat-v">{epitaph.miles}</span>
+          </div>
+          <div className="tombstone-stat" role="listitem">
+            <span className="tombstone-stat-k">ROUTE</span>
+            <span className="tombstone-stat-v">{ROUTE_LABEL[epitaph.route]}</span>
+          </div>
+          <div className="tombstone-stat" role="listitem">
+            <span className="tombstone-stat-k">DECISIONS</span>
+            <span className="tombstone-stat-v">{epitaph.decisions}</span>
+          </div>
+          <div className="tombstone-stat tombstone-stat--full" role="listitem">
+            <span className="tombstone-stat-k">LANDMARKS</span>
+            <span className="tombstone-stat-v">
+              {epitaph.landmarks.join(" → ")}
+            </span>
+          </div>
+        </div>
 
+        <div className="tombstone-cause">
+          <p className="tombstone-cause-label">RESULT</p>
+          <p className="tombstone-cause-text">{epitaph.cause}</p>
+        </div>
+
+        <div className="tombstone-actions">
           <button type="button" className="btn btn--play" onClick={onRetry}>
             <span className="blink">►</span> TRY AGAIN
           </button>
