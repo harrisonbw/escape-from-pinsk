@@ -83,20 +83,7 @@ export function enumerateAllPaths(maxPaths = 500): PathResult[] {
     const node = getNode(s.nodeId);
 
     if (node.kind === "terminal") {
-      const withEpitaph = s.epitaph
-        ? s
-        : { ...s, epitaph: null };
-      // Ensure epitaph present
-      const final =
-        withEpitaph.epitaph != null
-          ? withEpitaph
-          : playChoice(
-              // re-run shouldn't happen; terminals set epitaph
-              s,
-              "stay",
-            );
-
-      // For terminals, epitaph should already be set by applyChoice
+      // Epitaph is set by applyChoice when landing on a terminal
       const epitaph = s.epitaph;
       results.push({
         name: frame.choices.join(" → ") || node.id,
