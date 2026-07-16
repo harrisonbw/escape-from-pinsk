@@ -190,9 +190,6 @@ export function Game() {
               <div className="console console--boot">
                 <div className="console-frame">
                   <div className="console-frame-inner">
-                    <p className="boot-kicker">
-                      MECC · HISTORICAL TRAIL SERIES
-                    </p>
                     <h1 className="boot-title">ESCAPE FROM PINSK</h1>
                     <div className="boot-prose">
                       {node.prose.split("\n").map((line, i) =>
@@ -226,9 +223,6 @@ export function Game() {
                 <div className="console-frame">
                   <div className="console-frame-inner">
                     <div className="console-header">
-                      <span className="console-landmark">
-                        {node.title ?? "LANDMARK"}
-                      </span>
                       <span className="console-date">
                         {state.dateLabel} · {state.miles} MI
                       </span>
@@ -242,7 +236,6 @@ export function Game() {
                     />
                     {typeDone && (
                       <>
-                        <p className="menu-prompt">What will you do?</p>
                         <div className="choices" role="menu">
                           {node.choices?.map((c, i) => (
                             <button
@@ -278,9 +271,6 @@ export function Game() {
                 <div className="console-frame">
                   <div className="console-frame-inner">
                     <div className="console-header">
-                      <span className="console-landmark">
-                        {node.title ?? "THE TRAIL"}
-                      </span>
                       <span className="console-date">
                         {state.dateLabel} · {state.miles} MI
                       </span>
@@ -322,12 +312,6 @@ export function Game() {
               <div className="console console--death" onClick={onConsoleClick}>
                 <div className="console-frame">
                   <div className="console-frame-inner">
-                    <p className="terminal-banner">
-                      ══ {node.status?.replace(/_/g, " ") ?? "THE END"} ══
-                    </p>
-                    {node.title && (
-                      <h2 className="scene-title">{node.title}</h2>
-                    )}
                     <Typewriter
                       text={node.prose}
                       className="scene-prose"
@@ -348,7 +332,7 @@ export function Game() {
                             onAdvance();
                           }}
                         >
-                          <span className="blink">►</span> View tombstone
+                          <span className="blink">►</span> Continue
                         </button>
                         <p className="console-hint">
                           PRESS SPACE BAR TO CONTINUE

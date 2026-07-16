@@ -28,7 +28,6 @@ export function Tombstone({ epitaph, onRetry }: TombstoneProps) {
 `}</pre>
 
           <p className="tombstone-banner">══ {status} ══</p>
-          <h2 className="tombstone-title">{epitaph.title.toUpperCase()}</h2>
 
           <dl className="tombstone-stats">
             <div className="tombstone-row">
@@ -53,14 +52,11 @@ export function Tombstone({ epitaph, onRetry }: TombstoneProps) {
             </div>
           </dl>
 
+          {/* Cause is verbatim draft result text only — no rephrasing */}
           <div className="tombstone-cause">
-            <p className="tombstone-cause-label">CAUSE</p>
+            <p className="tombstone-cause-label">RESULT</p>
             <p className="tombstone-cause-text">{epitaph.cause}</p>
           </div>
-
-          <p className="tombstone-epilogue">
-            The route ends here. Occupation violence left few safe paths.
-          </p>
 
           <button type="button" className="btn btn--play" onClick={onRetry}>
             <span className="blink">►</span> TRY AGAIN

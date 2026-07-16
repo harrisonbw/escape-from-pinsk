@@ -254,7 +254,8 @@ export function buildEpitaph(state: GameState, deathNode: StoryNode): Epitaph {
   const route = state.route !== "none" ? state.route : routeFromNode(deathNode.id);
   return {
     status: deathNode.status ?? "KILLED",
-    title: deathNode.title ?? "The End",
+    title: "",
+    // Verbatim draft result only
     cause: deathNode.prose,
     dateLabel: deathNode.dateLabel ?? state.dateLabel,
     miles: state.miles,
