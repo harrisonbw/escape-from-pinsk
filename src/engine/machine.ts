@@ -28,7 +28,7 @@ export function getNode(id: string): StoryNode {
 export function createInitialState(): GameState {
   return {
     nodeId: START_NODE,
-    dateLabel: "Jul–Aug 1941",
+    dateLabel: "Jul-Aug 1941",
     health: 3,
     food: 2,
     shelter: "home",
@@ -115,21 +115,15 @@ function shouldShowTravel(
   const route =
     routeFromNode(toId) !== "none" ? routeFromNode(toId) : state.route;
 
-  // Season change → always show travel
   if (to.dateLabel && to.dateLabel !== state.dateLabel) return true;
-
-  // First flight out of the village
   if (fromId === "S01" && (toId === "S01B" || toId === "S01C")) return true;
 
-  // Landmark change along a route
   if (route !== "none") {
     const a = landmarkIndexFor(route, fromId);
     const b = landmarkIndexFor(route, toId);
     if (a !== b) return true;
   }
 
-  // Don't show a travel interstitial for same-landmark continues
-  // (was stranding players on "ARRIVED · PINSK" with a clipped button)
   return false;
 }
 
@@ -232,7 +226,6 @@ export function completeTravel(state: GameState): GameState {
   };
 }
 
-/** Unique landmarks visited along the route from history */
 export function landmarksVisited(route: RouteId, history: string[]): string[] {
   if (route === "none") return ["PINSK"];
   const marks = landmarksFor(route);
@@ -251,11 +244,11 @@ export function landmarksVisited(route: RouteId, history: string[]): string[] {
 
 export function buildEpitaph(state: GameState, deathNode: StoryNode): Epitaph {
   const history = [...state.history, deathNode.id];
-  const route = state.route !== "none" ? state.route : routeFromNode(deathNode.id);
+  const route =
+    state.route !== "none" ? state.route : routeFromNode(deathNode.id);
   return {
     status: deathNode.status ?? "KILLED",
     title: "",
-    // Verbatim draft result only
     cause: deathNode.prose,
     dateLabel: deathNode.dateLabel ?? state.dateLabel,
     miles: state.miles,
@@ -286,4 +279,22 @@ export function restart(): GameState {
 export function artUrl(style: "a" | "b", file: string): string {
   const base = import.meta.env.BASE_URL || "/";
   return `${base}art/style-${style}/${file}`;
+}
+
+/** Auto-clear travel interstitials so pure engine tests can walk paths. */
+export function resolveTravel(state: GameState): GameState {
+  let s = state;
+  let guard = 0;
+  while (s.travel && guard++ < 20) {
+    s = completeTravel(s);
+  }
+  return s;
+}
+
+export function playChoice(state: GameState, choiceId: string): GameState {
+  return resolveTravel(applyChoice(resolveTravel(state), choiceId));
+}
+
+export function playAdvance(state: GameState): GameState {
+  return resolveTravel(advance(resolveTravel(state)));
 }
