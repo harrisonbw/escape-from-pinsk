@@ -4,6 +4,7 @@
    ═══════════════════════════════════════════════════════════════════════ */
 
 .app {
+  position: relative;
   min-height: 100%;
   min-height: 100dvh;
   height: 100dvh;
@@ -12,6 +13,43 @@
   padding: 0;
   overflow: hidden;
   background: #000;
+}
+
+/* 8-bit music mute / start */
+.music-toggle {
+  position: fixed;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 50;
+  font-family: "Press Start 2P", "VT323", monospace;
+  font-size: 8px;
+  letter-spacing: 0.06em;
+  padding: 0.45rem 0.55rem;
+  color: #33ff33;
+  background: rgba(0, 0, 0, 0.75);
+  border: 2px solid #33ff33;
+  box-shadow: 2px 2px 0 #005500;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.music-toggle:hover,
+.music-toggle:focus-visible {
+  background: #33ff33;
+  color: #000;
+}
+
+.music-toggle--off {
+  color: #555;
+  border-color: #555;
+  box-shadow: none;
+}
+
+.music-toggle--off:hover,
+.music-toggle--off:focus-visible {
+  color: #33ff33;
+  border-color: #33ff33;
+  background: rgba(0, 0, 0, 0.85);
 }
 
 .app--flash .stage-viewport {

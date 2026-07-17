@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { blip, deathToll, tombstoneOpen } from "../audio/fx";
+import { startMusic } from "../audio/music";
 import {
   advance,
   applyChoice,
@@ -11,6 +12,7 @@ import {
 } from "../engine/machine";
 import type { GameState } from "../engine/types";
 import { Hud } from "./Hud";
+import { MusicToggle } from "./MusicToggle";
 import { Stage } from "./Stage";
 import { Tombstone } from "./Tombstone";
 import { TrailMap } from "./TrailMap";
@@ -113,6 +115,7 @@ export function Game() {
     }
 
     if (current.kind === "boot" && current.next === "S01") {
+      void startMusic();
       blip(660, 50);
       setState({
         ...createInitialState(),
@@ -167,6 +170,7 @@ export function Game() {
 
   return (
     <div className={`app app--${mode}${flash ? " app--flash" : ""}`}>
+      <MusicToggle />
       <Stage
         node={node}
         mode={mode}
