@@ -3,7 +3,6 @@ import { wagonCreak } from "../audio/fx";
 import {
   landmarkIndexFor,
   landmarksFor,
-  playableLandmarks,
   type RouteId,
 } from "../content/trail";
 import type { TravelState } from "../engine/types";
@@ -27,14 +26,13 @@ export function TrailMap({
   onContinue,
 }: TrailMapProps) {
   const r = route === "none" ? "west" : route;
-  const allMarks = landmarksFor(r);
-  const playable = playableLandmarks(r);
+  const marks = landmarksFor(r);
   const nextIdx = landmarkIndexFor(r, travel.nextNodeId);
   const fromIdx = landmarkIndexFor(r, currentNodeId);
 
-  const fromPct = playable[fromIdx]?.pct ?? 0;
-  const rawTo = playable[nextIdx]?.pct ?? fromPct + 6;
-  const toPct = rawTo === fromPct ? Math.min(100, fromPct + 4) : rawTo;
+  const fromPct = marks[fromIdx]?.pct ?? 0;
+  const rawTo = marks[nextIdx]?.pct ?? fromPct + 10;
+  const toPct = rawTo === fromPct ? Math.min(100, fromPct + 8) : rawTo;
 
   const [wagonPct, setWagonPct] = useState(fromPct);
   const [moving, setMoving] = useState(true);
@@ -93,15 +91,10 @@ export function TrailMap({
 
   const routeLabel =
     route === "east"
-      ? "EAST ROUTE · 1941–1945"
+      ? "EAST ROUTE · BELARUS"
       : route === "west"
-        ? "WEST ROUTE · 1941–1945"
-        : "PINSK REGION · 1941–1945";
-
-  const span = Math.max(0.01, toPct - fromPct);
-  const progressPct = moving
-    ? Math.min(100, Math.max(0, ((wagonPct - fromPct) / span) * 100))
-    : 100;
+        ? "WEST ROUTE · POLAND"
+        : "PINSK REGION";
 
   return (
     <div className="travel-screen">
@@ -139,7 +132,7 @@ export function TrailMap({
               </p>
             )}
 
-            <div className="map" aria-label="Trail map 1941 to 1945">
+            <div className="map" aria-label="Trail map">
               <div className="map-header">{routeLabel}</div>
               <div className="map-body">
                 <div className="map-terrain map-terrain--sky" />
@@ -149,37 +142,23 @@ export function TrailMap({
                   <div className="map-dust" style={{ left: `${wagonPct}%` }} />
                 )}
 
-                {allMarks.map((m) => {
-                  const playIdx = playable.findIndex((p) => p.id === m.id);
-                  const isFuture = Boolean(m.future);
-                  const isDone = !isFuture && playIdx >= 0 && playIdx < nextIdx;
-                  const isNext = !isFuture && playIdx === nextIdx;
-                  const isFrom = !isFuture && playIdx === fromIdx;
-                  return (
-                    <div
-                      key={m.id}
-                      className={
-                        "map-mark" +
-                        (isFuture ? " map-mark--future" : "") +
-                        (isDone ? " map-mark--done" : "") +
-                        (isNext ? " map-mark--next" : "") +
-                        (isFrom ? " map-mark--from" : "")
-                      }
-                      style={{ left: `${m.pct}%` }}
-                    >
-                      <span className="map-mark-dot">
-                        {isFuture
-                          ? "·"
-                          : isNext
-                            ? "▲"
-                            : isDone
-                              ? "■"
-                              : "□"}
-                      </span>
-                      <span className="map-mark-name">{m.name}</span>
-                    </div>
-                  );
-                })}
+                {marks.map((m, i) => (
+                  <div
+                    key={m.id}
+                    className={
+                      "map-mark" +
+                      (i < nextIdx ? " map-mark--done" : "") +
+                      (i === nextIdx ? " map-mark--next" : "") +
+                      (i === fromIdx ? " map-mark--from" : "")
+                    }
+                    style={{ left: `${m.pct}%` }}
+                  >
+                    <span className="map-mark-dot">
+                      {i === nextIdx ? "▲" : i < nextIdx ? "■" : "□"}
+                    </span>
+                    <span className="map-mark-name">{m.name}</span>
+                  </div>
+                ))}
 
                 <div
                   className={
@@ -193,15 +172,9 @@ export function TrailMap({
               </div>
               <div className="map-footer">
                 <span>1941 · PINSK</span>
+                {/* Soft frame only — no progress bar that fills to a hard end */}
                 <span>1945 →</span>
               </div>
-            </div>
-
-            <div className="travel-progress" aria-hidden>
-              <div
-                className="travel-progress-fill"
-                style={{ width: `${progressPct}%` }}
-              />
             </div>
           </div>
 

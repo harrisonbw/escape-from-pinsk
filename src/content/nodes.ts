@@ -14,9 +14,8 @@ export const NODES: Record<string, StoryNode> = {
   BOOT: {
     id: "BOOT",
     kind: "boot",
-    // Robbie: remove spoiler title that telegraphs death/ending.
-    // Trail frame is 1941–1945; draft story beats still use sheet dates.
-    prose: "Follow the Holocaust Trail...",
+    prose:
+      "Which Concentration Camp Would You Have Died In?\n\nFollow the Holocaust Trail...",
     image: { style: "a", file: "A-BOOT_title_screen.webp" },
     cta: "PLAY",
     next: "S01",
