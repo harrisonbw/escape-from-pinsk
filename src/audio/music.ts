@@ -126,7 +126,13 @@ let timer: number | null = null;
 let stepIndex = 0;
 let bassIndex = 0;
 let bassRemain = 0;
-let muted = false;
+let muted = (() => {
+  try {
+    return localStorage.getItem("efp-music-muted") === "1";
+  } catch {
+    return false;
+  }
+})();
 let started = false;
 let melodyRemain = 0;
 let nextNoteAt = 0;
