@@ -12,13 +12,10 @@ interface TombstoneProps {
 }
 
 export function Tombstone({ epitaph, onRetry }: TombstoneProps) {
-  const status = epitaph.status.replace(/_/g, " ");
-
   return (
     <div className="tombstone">
       <div className="tombstone-panel">
-        <p className="tombstone-kicker">HERE LIES A TRAVELER FROM PINSK</p>
-        <p className="tombstone-banner">══ {status} ══</p>
+        <p className="tombstone-kicker">THE TRAIL · 1941–1945</p>
 
         <div className="tombstone-stats" role="list">
           <div className="tombstone-stat" role="listitem">

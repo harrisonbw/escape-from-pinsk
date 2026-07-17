@@ -3,12 +3,12 @@ import { wagonCreak } from "../audio/fx";
 import {
   landmarkIndexFor,
   landmarksFor,
+  playableLandmarks,
   type RouteId,
 } from "../content/trail";
 import type { TravelState } from "../engine/types";
 
 const TRAVEL_MS = 900;
-/** Auto-advance after ARRIVED so players never get stuck */
 const AUTO_CONTINUE_MS = 700;
 
 interface TrailMapProps {
@@ -27,14 +27,14 @@ export function TrailMap({
   onContinue,
 }: TrailMapProps) {
   const r = route === "none" ? "west" : route;
-  const marks = landmarksFor(r);
+  const allMarks = landmarksFor(r);
+  const playable = playableLandmarks(r);
   const nextIdx = landmarkIndexFor(r, travel.nextNodeId);
   const fromIdx = landmarkIndexFor(r, currentNodeId);
 
-  const fromPct = marks[fromIdx]?.pct ?? 0;
-  // Always move at least a little so the wagon animates
-  const rawTo = marks[nextIdx]?.pct ?? fromPct + 10;
-  const toPct = rawTo === fromPct ? Math.min(100, fromPct + 8) : rawTo;
+  const fromPct = playable[fromIdx]?.pct ?? 0;
+  const rawTo = playable[nextIdx]?.pct ?? fromPct + 6;
+  const toPct = rawTo === fromPct ? Math.min(100, fromPct + 4) : rawTo;
 
   const [wagonPct, setWagonPct] = useState(fromPct);
   const [moving, setMoving] = useState(true);
@@ -49,7 +49,6 @@ export function TrailMap({
     onContinueRef.current();
   };
 
-  // Animate wagon + creaks, then auto-continue
   useEffect(() => {
     finishedRef.current = false;
     setWagonPct(fromPct);
@@ -78,7 +77,6 @@ export function TrailMap({
         setMoving(false);
         setArrived(true);
         setWagonPct(toPct);
-        // Don't strand players on ARRIVED — auto continue
         autoTimer = window.setTimeout(() => finish(), AUTO_CONTINUE_MS);
       }
     };
@@ -90,25 +88,20 @@ export function TrailMap({
       cancelAnimationFrame(raf);
       window.clearTimeout(autoTimer);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- only re-run per travel hop
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fromPct, toPct, travel.nextNodeId]);
 
   const routeLabel =
     route === "east"
-      ? "EAST ROUTE · BELARUS"
+      ? "EAST ROUTE · 1941–1945"
       : route === "west"
-        ? "WEST ROUTE · POLAND"
-        : "PINSK REGION";
+        ? "WEST ROUTE · 1941–1945"
+        : "PINSK REGION · 1941–1945";
 
   const span = Math.max(0.01, toPct - fromPct);
   const progressPct = moving
     ? Math.min(100, Math.max(0, ((wagonPct - fromPct) / span) * 100))
     : 100;
-
-  const skipOrContinue = () => {
-    // One tap always leaves the travel screen
-    finish();
-  };
 
   return (
     <div className="travel-screen">
@@ -146,7 +139,7 @@ export function TrailMap({
               </p>
             )}
 
-            <div className="map" aria-label="Trail map">
+            <div className="map" aria-label="Trail map 1941 to 1945">
               <div className="map-header">{routeLabel}</div>
               <div className="map-body">
                 <div className="map-terrain map-terrain--sky" />
@@ -156,23 +149,37 @@ export function TrailMap({
                   <div className="map-dust" style={{ left: `${wagonPct}%` }} />
                 )}
 
-                {marks.map((m, i) => (
-                  <div
-                    key={m.id}
-                    className={
-                      "map-mark" +
-                      (i < nextIdx ? " map-mark--done" : "") +
-                      (i === nextIdx ? " map-mark--next" : "") +
-                      (i === fromIdx ? " map-mark--from" : "")
-                    }
-                    style={{ left: `${m.pct}%` }}
-                  >
-                    <span className="map-mark-dot">
-                      {i === nextIdx ? "▲" : i < nextIdx ? "■" : "□"}
-                    </span>
-                    <span className="map-mark-name">{m.name}</span>
-                  </div>
-                ))}
+                {allMarks.map((m) => {
+                  const playIdx = playable.findIndex((p) => p.id === m.id);
+                  const isFuture = Boolean(m.future);
+                  const isDone = !isFuture && playIdx >= 0 && playIdx < nextIdx;
+                  const isNext = !isFuture && playIdx === nextIdx;
+                  const isFrom = !isFuture && playIdx === fromIdx;
+                  return (
+                    <div
+                      key={m.id}
+                      className={
+                        "map-mark" +
+                        (isFuture ? " map-mark--future" : "") +
+                        (isDone ? " map-mark--done" : "") +
+                        (isNext ? " map-mark--next" : "") +
+                        (isFrom ? " map-mark--from" : "")
+                      }
+                      style={{ left: `${m.pct}%` }}
+                    >
+                      <span className="map-mark-dot">
+                        {isFuture
+                          ? "·"
+                          : isNext
+                            ? "▲"
+                            : isDone
+                              ? "■"
+                              : "□"}
+                      </span>
+                      <span className="map-mark-name">{m.name}</span>
+                    </div>
+                  );
+                })}
 
                 <div
                   className={
@@ -185,12 +192,8 @@ export function TrailMap({
                 </div>
               </div>
               <div className="map-footer">
-                <span>START: PINSK</span>
-                <span>
-                  {route === "east"
-                    ? "INTO THE MARSHES"
-                    : "TOWARD OCCUPIED POLAND"}
-                </span>
+                <span>1941 · PINSK</span>
+                <span>1945 →</span>
               </div>
             </div>
 
@@ -206,7 +209,7 @@ export function TrailMap({
             <button
               type="button"
               className="btn btn--cta btn--travel-continue"
-              onClick={skipOrContinue}
+              onClick={finish}
             >
               <span className="blink">►</span>{" "}
               {moving ? "Skip travel" : "Continue on the trail"}

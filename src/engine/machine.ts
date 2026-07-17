@@ -2,8 +2,8 @@ import { NODES, START_NODE } from "../content/nodes";
 import {
   isSeasonChange,
   landmarkIndexFor,
-  landmarksFor,
   milesForArrival,
+  playableLandmarks,
   routeFromNode,
   seasonIndex,
   SEASON_ORDER,
@@ -85,7 +85,7 @@ function buildTravel(
         : state.route;
 
   const toDate = next.dateLabel ?? state.dateLabel;
-  const marks = landmarksFor(route);
+  const marks = playableLandmarks(route);
   const idx = landmarkIndexFor(route, nextId);
   const landmarkName =
     marks[idx]?.name ?? next.title?.toUpperCase() ?? "THE TRAIL";
@@ -228,7 +228,7 @@ export function completeTravel(state: GameState): GameState {
 
 export function landmarksVisited(route: RouteId, history: string[]): string[] {
   if (route === "none") return ["PINSK"];
-  const marks = landmarksFor(route);
+  const marks = playableLandmarks(route);
   const seen = new Set<string>();
   const ordered: string[] = [];
   for (const id of history) {

@@ -812,6 +812,16 @@
   color: #ffff55;
 }
 
+.map-mark--future .map-mark-dot {
+  color: #5555aa;
+  opacity: 0.85;
+}
+
+.map-mark--future .map-mark-name {
+  color: #5555ff;
+  opacity: 0.75;
+}
+
 .map-wagon {
   position: absolute;
   top: 44%;
