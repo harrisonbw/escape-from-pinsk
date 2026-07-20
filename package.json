@@ -6,6 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:replit": "VITE_BASE=/ tsc -b && VITE_BASE=/ vite build",
+    "build:pages": "VITE_BASE=/escape-from-pinsk/ tsc -b && VITE_BASE=/escape-from-pinsk/ vite build",
+    "start": "serve dist -l 3000",
     "lint": "oxlint",
     "preview": "vite preview",
     "test": "vitest run",
@@ -22,6 +25,7 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.3",
     "oxlint": "^1.71.0",
+    "serve": "^14.2.4",
     "typescript": "~6.0.2",
     "vite": "^8.1.1",
     "vitest": "^4.1.10"

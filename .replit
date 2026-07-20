@@ -1,0 +1,15 @@
+modules = ["nodejs-20"]
+run = "npm start"
+hidden = [".config", "node_modules", "dist"]
+
+[nix]
+channel = "stable-24_05"
+
+[deployment]
+run = ["sh", "-c", "npm run build:replit && npm start"]
+build = ["npm", "run", "build:replit"]
+deploymentTarget = "cloudrun"
+
+[[ports]]
+localPort = 3000
+externalPort = 80
